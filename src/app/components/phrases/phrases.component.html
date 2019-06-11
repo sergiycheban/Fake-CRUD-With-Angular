@@ -1,0 +1,92 @@
+<form>
+  <div class="form-group">
+    <label>Title</label>
+    <div class="input-group">
+      <input #title id="title" class="form-control" />
+    </div>
+    <label>Body</label>
+    <div class="input-group">
+      <input #body id="body" class="form-control" />
+    </div>
+  </div>
+</form>
+<button
+  (click)="createPhrase(title.value, body.value)"
+  type="button"
+  class="btn btn-primary btn-lg btn-block"
+>
+  Add
+</button>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let phrase of phrases">
+      <td>{{ phrase.id }}</td>
+      <td>{{ phrase.title }}</td>
+      <td>{{ phrase.body }}</td>
+      <td>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <button
+            id="phrase.id"
+            (click)="open(content, phrase.id)"
+            type="button"
+            class="btn btn-success"
+          >
+            Edit
+          </button>
+          <button
+            (click)="deletePhrases(phrase)"
+            type="button"
+            class="btn btn-danger"
+          >
+            X
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Read</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Title</label>
+        <div class="input-group">
+          <input #titleModal id="title" Modal class="form-control" />
+        </div>
+        <label>Body</label>
+        <div class="input-group">
+          <input #bodyModal id="bodyModal" class="form-control" />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="updatePhrases(titleModal.value, bodyModal.value)"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
